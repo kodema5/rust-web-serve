@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+
+<script>
+    console.clear()
+    if (window.lastInt) clearInterval(lastInt)
+    data = { a:123, b:456, '.name':'name' }
+
+    count = 0
+    lastInt = setInterval(() => {
+        count++
+        if (count % 10===0) {
+            console.clear()
+            count = 0
+        }
+        data.count = count
+
+        fetch('/test', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then( r => r.json())
+        .then( j => console.log('-----', j))
+    }, 2000)
+</script>
+
+
+</body>
+</html>
+
